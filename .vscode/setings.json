@@ -1,9 +1,0 @@
-{
-    "code-runner.executorMap": {
-        "cpp": "cd /d \"$dir\" && g++.exe -std=gnu++14 -O2 -Wall \"$fullFileName\" -o \"$dir$fileNameWithoutExt.exe\" && \"$dir$fileNameWithoutExt.exe\" < \"$dirinput.txt\" > \"$diroutput.txt\""
-    },
-    "code-runner.saveFileBeforeRun": true,
-    "code-runner.ignoreSelection": true,
-    "code-runner.runInTerminal": false,
-    "code-runner.showRunIconInEditorTitleMenu": true
-}
