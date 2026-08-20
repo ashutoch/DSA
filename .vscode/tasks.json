@@ -7,7 +7,13 @@
             "command": "${workspaceFolder}\\.vscode\\run-compile.bat",
             "args": ["${file}"],
             "group": "build",
-            "problemMatcher": ["$gcc"]
+            "problemMatcher": ["$gcc"],
+            "presentation": {
+                "reveal": "never",
+                "panel": "dedicated",
+                "focus": false,
+                "clear": true
+            }
         },
         {
             "label": "compile and run",
@@ -20,8 +26,9 @@
             },
             "problemMatcher": ["$gcc"],
             "presentation": {
-                "reveal": "always",
+                "reveal": "never",
                 "panel": "dedicated",
+                "focus": false,
                 "clear": true
             }
         }
