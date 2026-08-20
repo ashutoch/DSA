@@ -1,5 +1,5 @@
-    A    
-   ABA   
-  ABCBA  
- ABCDCBA 
-ABCDEDCBA
+E
+DE
+CDE
+BCDE
+ABCDE
