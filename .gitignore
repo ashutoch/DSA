@@ -1,0 +1,13 @@
+# Ignore input and output text files in any subfolder
+input.txt
+output.txt
+
+# (Optional) Ignore all variants like input1.txt, output2.txt, etc.
+input*.txt
+output*.txt
+
+# Ignore compiled C++ executables
+*.exe
+
+# Ignore VS Code local workspace settings (optional)
+.vscode/
