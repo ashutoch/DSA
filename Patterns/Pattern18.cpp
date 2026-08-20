@@ -16,7 +16,6 @@
 using namespace std;
 
 void print(int n) {
-    // ---------------- TOP HALF (Includes middle line) ----------------
     for (int i = 1; i <= n; i++) {
 
         // Left stars (1 to i)
@@ -37,7 +36,6 @@ void print(int n) {
         cout << endl;
     }
 
-    // ---------------- BOTTOM HALF ----------------
     for (int i = n - 1; i >= 1; i--) {
 
         // Left stars (i stars)
