@@ -1,58 +1,28 @@
 /*
 
-*        *
-**      **
-***    ***
-****  ****
-**********
-****  ****
-***    ***
-**      **
-*        *
+****
+*  *
+*  *
+****
 
-*/ 
+*/
 
 #include <bits/stdc++.h>
 using namespace std;
 
 void print(int n) {
-    for (int i = 1; i <= n; i++) {
-
-        // Left stars (1 to i)
-        for (int j = 1; j <= i; j++) {
-            cout << "*";
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            
+            // Print '*' if we are on the border (top, bottom, left, or right)
+            if (i == 0 || i == n - 1 || j == 0 || j == n - 1) {
+                cout << "*";
+            } 
+            // Otherwise print a space
+            else {
+                cout << " ";
+            }
         }
-
-        // Spaces in middle: 2 * (n - i)
-        for (int j = 1; j <= 2 * (n - i); j++) {
-            cout << " ";
-        }
-
-        // Right stars (1 to i)
-        for (int j = 1; j <= i; j++) {
-            cout << "*";
-        }
-
-        cout << endl;
-    }
-
-    for (int i = n - 1; i >= 1; i--) {
-
-        // Left stars (i stars)
-        for (int j = 1; j <= i; j++) {
-            cout << "*";
-        }
-
-        // Spaces in middle: 2 * (n - i)
-        for (int j = 1; j <= 2 * (n - i); j++) {
-            cout << " ";
-        }
-
-        // Right stars (i stars)
-        for (int j = 1; j <= i; j++) {
-            cout << "*";
-        }
-
         cout << endl;
     }
 }
