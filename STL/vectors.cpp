@@ -58,7 +58,7 @@ void explainVectors() {
         
         [out of bounds]   [10]   [20]   [30]   [40]   [50]   [out of bounds]
               ^            ^                           ^            ^
-          rend()        begin()                     rbegin()      end()
+           rend()       begin()                     rbegin()       end()
     */
     vector<int> nums = {10, 20, 30, 40, 50};
     cout << "4. ITERATORS DEMONSTRATION on {10, 20, 30, 40, 50}\n";
