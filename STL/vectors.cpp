@@ -368,7 +368,7 @@ void explainStack() {
 }
 
 // ===================================================================
-// QUEUE (FIFO — First In, First Out)
+// 6. QUEUE (FIFO — First In, First Out)
 // ===================================================================
 void explainQueue() {
     cout << "========== QUEUE (FIFO) ==========\n";
@@ -393,12 +393,12 @@ void explainQueue() {
 
     queue<int> q;
 
-    // 1. PUSH / EMPLACE: Adds elements to the back
+    // a. PUSH / EMPLACE: Adds elements to the back
     q.push(10);     // Queue: [10]        (Front: 10, Back: 10)
     q.push(20);     // Queue: [10, 20]    (Front: 10, Back: 20)
     q.emplace(30);  // Queue: [10, 20, 30](Front: 10, Back: 30)
 
-    // 2. FRONT & BACK: Inspecting values
+    // b. FRONT & BACK: Inspecting values
     cout << "Front element: " << q.front() << endl; // 10
     cout << "Back element:  " << q.back() << endl;  // 30
 
@@ -406,15 +406,15 @@ void explainQueue() {
     q.back() += 5;  // Changes 30 to 35 -> Queue: [10, 20, 35]
     cout << "Modified Back element: " << q.back() << endl; // 35
 
-    // 3. POP: Removes the FRONT element
+    // c. POP: Removes the FRONT element
     q.pop();        // Removes 10 -> Queue: [20, 35]
     cout << "Front element after pop(): " << q.front() << endl; // 20
 
-    // 4. SIZE & EMPTY CHECK
+    // d. SIZE & EMPTY CHECK
     cout << "Current size: " << q.size() << endl;                    // 2
     cout << "Is queue empty? " << (q.empty() ? "Yes" : "No") << endl; // No
 
-    // 5. SWAP: Swaps contents of two queues in O(1) time
+    // e. SWAP: Swaps contents of two queues in O(1) time
     queue<int> q1, q2;
     q1.push(1);
     q1.push(2);   // q1 = [1, 2]
@@ -428,6 +428,159 @@ void explainQueue() {
         << " | q2.front(): " << q2.front() << "\n\n";
 }
 
+// ===================================================================
+// 7. PRIORITY QUEUE (Max-Heap & Min-Heap)
+// ===================================================================
+void explainPriorityQueue() {
+    cout << "========== PRIORITY QUEUE ==========\n";
+    /*
+        - Inside a Priority Queue, elements are stored in a TREE structure (Heap).
+        - NOT stored sequentially, so elements are ALWAYS sorted automatically.
+        - DEFAULT: Max-Heap (Largest element stays at the TOP).
+        - Time Complexities:
+            - push() / emplace() : O(log N)
+            - pop()              : O(log N)
+            - top()              : O(1)
+
+        ALLOWED OPERATIONS:
+          - push() / emplace() : Insert element (placed in sorted order)
+          - pop()              : Remove top element
+          - top()              : Look at top element
+          - size(), empty(), swap()
+
+        RESTRICTIONS:
+          - NO front() or back() — ONLY top()
+          - NO iterators, NO index access
+    */
+
+    // -------------------------------------------------------------
+    // a. MAX-HEAP (Default: Largest element on Top)
+    // -------------------------------------------------------------
+    priority_queue<int> pq;
+
+    pq.push(5);     // {5}
+    pq.push(2);     // {5, 2}
+    pq.push(8);     // {8, 5, 2}   <- 8 goes to TOP automatically!
+    pq.emplace(10); // {10, 8, 5, 2} <- 10 goes to TOP
+
+    cout << "Max-Heap Top (Largest): " << pq.top() << endl; // 10
+
+    pq.pop(); // Removes top element (10) -> {8, 5, 2}
+    cout << "Top after pop(): " << pq.top() << endl;       // 8
+    cout << "Current size: " << pq.size() << "\n\n";
+
+
+    // -------------------------------------------------------------
+    // b. MIN-HEAP (Smallest element on Top)
+    // Syntax: priority_queue<type, container, comparator>
+    // -------------------------------------------------------------
+    priority_queue<int, vector<int>, greater<int>> min_pq;
+
+    min_pq.push(5);     // {5}
+    min_pq.push(2);     // {2, 5}   <- 2 goes to TOP automatically!
+    min_pq.push(8);     // {2, 5, 8}
+    min_pq.emplace(1);  // {1, 2, 5, 8} <- 1 goes to TOP
+
+    cout << "Min-Heap Top (Smallest): " << min_pq.top() << endl; // 1
+
+    min_pq.pop(); // Removes top element (1) -> {2, 5, 8}
+    cout << "Min-Heap Top after pop(): " << min_pq.top() << "\n\n"; // 2
+}
+
+// ===================================================================
+// 8. SET (Sorted & Unique)
+// ===================================================================
+void explainSet() {
+    cout << "========== SET ==========\n";
+    /*
+        - Stored in a Tree Structure (Red-Black Tree).
+        - TWO GOLDEN RULES OF SET:
+            1. SORTED : Elements are automatically kept in ascending order.
+            2. UNIQUE : No duplicates allowed. If you insert 2 twice, it stores it once.
+        
+        - Time Complexity: O(log N) for insert, erase, find, count.
+
+        ALLOWED OPERATIONS:
+          - insert() / emplace() : Add element (keeps it sorted and unique)
+          - find()               : Returns iterator to the element (or end() if not found)
+          - count()              : Returns 1 (if present) or 0 (if absent)
+          - erase()              : Delete by value OR by iterator / range
+          - lower_bound() / upper_bound()
+          - size(), empty(), clear(), swap()
+
+        RESTRICTIONS:
+          - Elements CANNOT be modified directly (e.g., *it = 10 is ILLEGAL)
+            because modifying an element breaks the sorted tree structure.
+    */
+
+    set<int> st;
+
+    // a. INSERTION (Auto-sorts & ignores duplicates)
+    st.insert(1);   // {1}
+    st.insert(2);   // {1, 2}
+    st.emplace(2);  // {1, 2}  <- Duplicate ignored!
+    st.insert(4);   // {1, 2, 4}
+    st.insert(3);   // {1, 2, 3, 4} <- Auto-sorted 3 into position!
+
+    cout << "Set elements (sorted & unique): ";
+    for (auto val : st) cout << val << " "; // Output: 1 2 3 4
+    cout << "\n\n";
+
+
+    // b. FIND & COUNT
+    // find() returns an iterator to the element
+    auto it = st.find(3); // Points to 3
+    if (it != st.end()) {
+        cout << "Element found using find(): " << *it << endl;
+    }
+
+    // If an element is NOT in the set, find() points to st.end()
+    auto it_not_found = st.find(10);
+    if (it_not_found == st.end()) {
+        cout << "10 is NOT in the set!" << endl;
+    }
+
+    // count() returns 1 if element exists, 0 if it doesn't
+    cout << "Count of 2: " << st.count(2) << endl; // 1
+    cout << "Count of 5: " << st.count(5) << "\n\n"; // 0
+
+
+    // c. ERASE VARIATIONS
+    set<int> s = {10, 20, 30, 40, 50};
+
+    // Variation A: Erase by Value
+    s.erase(20); // Removes 20 -> {10, 30, 40, 50}
+
+    // Variation B: Erase by Iterator
+    auto it_30 = s.find(30);
+    s.erase(it_30); // Removes 30 -> {10, 40, 50}
+
+    // Variation C: Erase Range [start, end)
+    auto start = s.find(10);
+    auto end = s.find(50);
+    s.erase(start, end); // Erases 10 and 40 (end is exclusive) -> {50}
+
+    cout << "Set after erasures: ";
+    for (auto val : s) cout << val << " "; // Output: 50
+    cout << "\n\n";
+
+
+    // d. LOWER BOUND & UPPER BOUND
+    /*
+        - lower_bound(x) : Points to element if present, ELSE points to first element > x
+        - upper_bound(x) : ALWAYS points to the first element strictly > x
+    */
+    set<int> numbers = {10, 20, 30, 40, 50};
+
+    auto lb1 = numbers.lower_bound(30); // Points to 30 (element exists)
+    auto lb2 = numbers.lower_bound(25); // Points to 30 (first element > 25)
+    
+    auto ub1 = numbers.upper_bound(30); // Points to 40 (first element strictly > 30)
+
+    cout << "lower_bound(30): " << *lb1 << endl; // 30
+    cout << "lower_bound(25): " << *lb2 << endl; // 30
+    cout << "upper_bound(30): " << *ub1 << "\n\n"; // 40
+}
 
 
 int main() {
@@ -437,5 +590,7 @@ int main() {
     explainQueue();
     explainStack();
     explainQueue();
+    explainPriorityQueue();
+    explainSet();
     return 0;
 }
