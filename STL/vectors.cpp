@@ -128,7 +128,10 @@ void explainVectors() {
     cout << "   After erase(nums.begin() + 1): ";
     for (auto x : nums) cout << x << " ";
     cout << endl;
-
+    /*
+    nums.erase(nums.begin()+1, nums.begin()+4); //* {start, end} will delete all elements from begin to end
+    */
+    
     // pop_back(): Removes the very last element in the vector.
     nums.pop_back(); // Removes 50
     cout << "   After pop_back(): ";
