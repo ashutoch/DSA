@@ -317,7 +317,54 @@ void explainQueue() {
     cout << "front after pop: " << q.front() << endl; // 2
 
     cout << "size: " << q.size() << " | empty? "
-        << (q.empty() ? "Yes" : "No") << "\n\n";
+         << (q.empty() ? "Yes" : "No") << "\n\n";
+}
+
+
+// ===================================================================
+// 5. STACK  (LIFO — Last In, First Out)
+// ===================================================================
+void explainStack() {
+    cout << "========== STACK (LIFO) ==========\n";
+    /*
+        - Like a stack of plates: last plate you put on is the first you take off
+        - ONLY these operations:
+              push / emplace  → add to TOP
+              pop             → remove from TOP
+              top             → look at TOP
+              size, empty, swap
+        - NO iterators, NO indexing, NO looping with begin/end
+        - NO front() or back() — only top()
+    */
+    stack<int> st;
+
+    st.push(1);     // {1}
+    st.push(2);     // {1, 2}
+    st.push(3);     // {1, 2, 3}
+    st.push(3);     // {1, 2, 3, 3}
+    st.emplace(5);  // {1, 2, 3, 3, 5}  ← 5 is now on TOP
+
+    cout << "top: " << st.top() << endl; // 5  (looks at top, does NOT remove)
+
+    st.pop(); // removes top (5) → {1, 2, 3, 3}
+    cout << "top after pop: " << st.top() << endl; // 3
+
+    cout << "size: " << st.size() << endl;         // 4
+    cout << "empty? " << (st.empty() ? "Yes" : "No") << endl; // No
+
+    // --- SWAP ---
+    stack<int> st1, st2;
+    st1.push(10);
+    st1.push(20); // st1 = {10, 20}  top=20
+
+    st2.push(100);
+    st2.push(200);
+    st2.push(300); // st2 = {100, 200, 300}  top=300
+
+    st1.swap(st2); // swap entire stacks
+
+    cout << "After swap → st1.top(): " << st1.top() // 300
+         << " | st2.top(): " << st2.top() << "\n\n"; // 20
 }
 
 
@@ -326,5 +373,6 @@ int main() {
     explainList();
     explainDeque();
     explainQueue();
+    explainStack();
     return 0;
 }
