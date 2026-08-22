@@ -4,13 +4,14 @@
 using namespace std;
 
 int rev(int n){
-    int num;
+    int num, revNum = 0;
     cout << "Reverse Order: ";
     while(n > 0){
         num = n % 10;
         n = n / 10;
-        cout << num;
+        revNum = (revNum * 10) + num;
     }
+    cout << revNum;
     return 0;
 }
 
