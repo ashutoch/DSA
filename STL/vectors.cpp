@@ -367,6 +367,68 @@ void explainStack() {
          << " | st2.top(): " << st2.top() << "\n\n"; // 20
 }
 
+// ===================================================================
+// QUEUE (FIFO — First In, First Out)
+// ===================================================================
+void explainQueue() {
+    cout << "========== QUEUE (FIFO) ==========\n";
+    /*
+        - Real life analogy: A line of people at a ticket counter.
+        - First element added is the first element removed (FIFO).
+        - Time Complexity: O(1) for push, pop, front, and back.
+
+        ALLOWED OPERATIONS:
+          - push() / emplace() : Add element to the BACK
+          - pop()              : Remove element from the FRONT
+          - front()            : Look at FRONT element
+          - back()             : Look at BACK element
+          - size()             : Number of elements
+          - empty()            : Check if empty (true/false)
+          - swap()             : Swap two queues
+
+        RESTRICTIONS:
+          - NO iterators (no begin(), end())
+          - NO index access (no q[0])
+    */
+
+    queue<int> q;
+
+    // 1. PUSH / EMPLACE: Adds elements to the back
+    q.push(10);     // Queue: [10]        (Front: 10, Back: 10)
+    q.push(20);     // Queue: [10, 20]    (Front: 10, Back: 20)
+    q.emplace(30);  // Queue: [10, 20, 30](Front: 10, Back: 30)
+
+    // 2. FRONT & BACK: Inspecting values
+    cout << "Front element: " << q.front() << endl; // 10
+    cout << "Back element:  " << q.back() << endl;  // 30
+
+    // You can modify elements directly using front() or back()
+    q.back() += 5;  // Changes 30 to 35 -> Queue: [10, 20, 35]
+    cout << "Modified Back element: " << q.back() << endl; // 35
+
+    // 3. POP: Removes the FRONT element
+    q.pop();        // Removes 10 -> Queue: [20, 35]
+    cout << "Front element after pop(): " << q.front() << endl; // 20
+
+    // 4. SIZE & EMPTY CHECK
+    cout << "Current size: " << q.size() << endl;                    // 2
+    cout << "Is queue empty? " << (q.empty() ? "Yes" : "No") << endl; // No
+
+    // 5. SWAP: Swaps contents of two queues in O(1) time
+    queue<int> q1, q2;
+    q1.push(1);
+    q1.push(2);   // q1 = [1, 2]
+
+    q2.push(100);
+    q2.push(200); // q2 = [100, 200]
+
+    q1.swap(q2);  // Now q1 = [100, 200], q2 = [1, 2]
+
+    cout << "After swap -> q1.front(): " << q1.front() 
+        << " | q2.front(): " << q2.front() << "\n\n";
+}
+
+
 
 int main() {
     explainVectors();
@@ -374,5 +436,6 @@ int main() {
     explainDeque();
     explainQueue();
     explainStack();
+    explainQueue();
     return 0;
 }
