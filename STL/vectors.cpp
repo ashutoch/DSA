@@ -582,6 +582,274 @@ void explainSet() {
     cout << "upper_bound(30): " << *ub1 << "\n\n"; // 40
 }
 
+// ===================================================================
+// 9. MULTISET (Sorted, BUT allows Duplicates)
+// ===================================================================
+void explainMultiSet() {
+    cout << "========== MULTISET ==========\n";
+    /*
+        - Stored in a Tree Structure (Red-Black Tree).
+        - RULES OF MULTISET:
+            1. SORTED : Elements are kept in ascending order.
+            2. DUPLICATES ALLOWED : Multiple copies of the same value can exist!
+        
+        - Time Complexity: O(log N) for insert, erase, find, count.
+
+        TRICKY INTERVIEW / DSA DIFFERENCE ON erase():
+          - ms.erase(x)          -> Deletes ALL occurrences of x!
+          - ms.erase(ms.find(x)) -> Deletes ONLY THE FIRST occurrence of x!
+    */
+
+    multiset<int> ms;
+
+    // a. INSERTION (Sorted, keeps duplicates)
+    ms.insert(1); // {1}
+    ms.insert(1); // {1, 1}
+    ms.insert(2); // {1, 1, 2}
+    ms.insert(1); // {1, 1, 1, 2}
+    ms.insert(3); // {1, 1, 1, 2, 3}
+
+    cout << "Multiset elements (sorted with duplicates): ";
+    for (auto val : ms) cout << val << " "; // Output: 1 1 1 2 3
+    cout << "\n\n";
+
+    // b. COUNT (Returns actual frequency of element)
+    cout << "Count of 1s: " << ms.count(1) << endl; // 3
+    cout << "Count of 2s: " << ms.count(2) << "\n\n"; // 1
+
+
+    // c. ERASE DEMONSTRATION (Crucial to understand!)
+    
+    // Case A: Erase by VALUE -> Deletes ALL occurrences of 1
+    multiset<int> ms1 = {1, 1, 1, 2, 3};
+    ms1.erase(1); // Removes ALL 1s -> {2, 3}
+    cout << "ms1 after ms1.erase(1) [Deletes ALL 1s]: ";
+    for (auto x : ms1) cout << x << " "; 
+    cout << endl;
+
+    // Case B: Erase by ITERATOR -> Deletes ONLY ONE occurrence
+    multiset<int> ms2 = {1, 1, 1, 2, 3};
+    ms2.erase(ms2.find(1)); // Finds first 1 and erases ONLY that one -> {1, 1, 2, 3}
+    cout << "ms2 after ms2.erase(ms2.find(1)) [Deletes ONLY ONE 1]: ";
+    for (auto x : ms2) cout << x << " "; 
+    cout << "\n\n";
+
+    // Case C: Erase Range [start, end)
+    multiset<int> ms3 = {10, 20, 30, 40, 50};
+    auto start = ms3.find(20);
+    auto end = ms3.find(40);
+    ms3.erase(start, end); // Erases 20 and 30 -> {10, 40, 50}
+    cout << "ms3 after range erase: ";
+    for (auto x : ms3) cout << x << " ";
+    cout << "\n\n";
+}
+
+
+// ===================================================================
+// 9. UNORDERED SET (NOT Sorted, Unique, Fast O(1))
+// ===================================================================
+void explainUnorderedSet() {
+    cout << "========== UNORDERED SET ==========\n";
+    /*
+        - Stored in a HASH TABLE (not a tree).
+        - RULES OF UNORDERED SET:
+            1. NOT SORTED : Order is randomized/arbitrary!
+            2. UNIQUE     : Duplicate values are NOT allowed.
+
+        - Time Complexity: 
+            - Average / Best Case : O(1) [Constant time — FASTER than set!]
+            - Worst Case          : O(N) [Extremely rare, happens on hash collisions]
+
+        RESTRICTIONS:
+          - lower_bound() and upper_bound() DO NOT WORK HERE (because elements aren't sorted!)
+          - Everything else (insert, erase, find, count, size) works the same as set.
+    */
+
+    unordered_set<int> st;
+
+    st.insert(5);
+    st.insert(1);
+    st.insert(8);
+    st.insert(2);
+    st.insert(2); // Duplicate ignored!
+
+    cout << "Unordered Set elements (Random order, Unique): ";
+    for (auto val : st) cout << val << " "; // Output will be in random order e.g., 2 8 1 5
+    cout << "\n\n";
+
+    // FIND & ERASE (Works in O(1) time!)
+    if (st.find(8) != st.end()) {
+        cout << "Found 8 in O(1) time!" << endl;
+    }
+
+    st.erase(8); // Removes 8 in O(1) time
+
+    cout << "After erasing 8: ";
+    for (auto val : st) cout << val << " ";
+    cout << "\n\n";
+}
+
+
+// ===================================================================
+// 10. MAP (Sorted Keys & Unique Keys)
+// ===================================================================
+void explainMap() {
+    cout << "========== MAP ==========\n";
+    /*
+        - Stores data in {KEY, VALUE} pairs (like a dictionary/phonebook).
+        - Stored in a Tree Structure (Red-Black Tree).
+        - RULES OF MAP:
+            1. UNIQUE KEYS : Every key must be unique!
+            2. SORTED KEYS : Keys are automatically kept in ascending order.
+            3. VALUES      : Values CAN be duplicated.
+        
+        - Time Complexity: O(log N) for insert, erase, access, find.
+    */
+
+    map<int, string> m; // Key = int, Value = string
+
+    // a. INSERTION METHODS
+    m[1] = "Ashu";          // Method A: using [] operator
+    m[2] = "Raj";
+    m[3] = "Simran";
+    m.insert({4, "Karan"});  // Method B: inserting a pair
+    m.emplace(5, "Pooja");   // Method C: emplace
+
+    // Overwriting value: Assigning a new value to an existing key updates it!
+    m[1] = "Ashutosh"; // Key 1's value changes from "Ashu" to "Ashutosh"
+
+    cout << "Map elements (Sorted by Key):\n";
+    for (auto p : m) {
+        // p.first  = KEY
+        // p.second = VALUE
+        cout << "  Key: " << p.first << " -> Value: " << p.second << endl;
+    }
+    cout << "\n";
+
+
+    // b. ACCESSING VALUES & IMPORTANT CAVEAT
+    cout << "Value at key 1: " << m[1] << endl; // Output: Ashutosh
+
+    /*
+        CRITICAL CAVEAT OF m[key]:
+        If you try to read a key that DOES NOT exist using m[key],
+        it automatically INSERTS that key with a default value!
+        Example: cout << m[10]; -> Inserts {10, ""} into the map!
+
+        To safely check if a key exists WITHOUT inserting it:
+        Use find() or count():
+    */
+    if (m.find(3) != m.end()) {
+        cout << "Key 3 exists with value: " << m[3] << endl;
+    }
+
+    if (m.count(10) == 0) {
+        cout << "Key 10 does NOT exist!" << endl;
+    }
+    cout << "\n";
+
+
+    // c. FIND & ERASE
+    auto it = m.find(2); // Iterator pointing to pair {2, "Raj"}
+    if (it != m.end()) {
+        cout << "Found via iterator: Key " << it->first << " -> Value " << it->second << endl;
+    }
+
+    m.erase(2); // Erases key 2 and its value
+    cout << "Count of key 2 after erase(2): " << m.count(2) << "\n\n";
+
+
+    // d. LOWER_BOUND & UPPER_BOUND (Operates on KEYS!)
+    map<int, int> mp = {{10, 100}, {20, 200}, {30, 300}};
+
+    auto lb = mp.lower_bound(20); // Iterator to key >= 20 ({20, 200})
+    auto ub = mp.upper_bound(20); // Iterator to key > 20  ({30, 300})
+
+    cout << "lower_bound(20): Key " << lb->first << " -> Value " << lb->second << endl; // 20 -> 200
+    cout << "upper_bound(20): Key " << ub->first << " -> Value " << ub->second << "\n\n"; // 30 -> 300
+}
+
+
+// ===================================================================
+// 11. MULTIMAP (Sorted Keys, BUT allows Duplicate Keys)
+// ===================================================================
+void explainMultiMap() {
+    cout << "========== MULTIMAP ==========\n";
+    /*
+        - Stored in a Tree Structure (Red-Black Tree).
+        - RULES OF MULTIMAP:
+            1. DUPLICATE KEYS ALLOWED : Multiple pairs can share the SAME key!
+            2. SORTED KEYS          : Keys are kept in ascending order.
+
+        - CRITICAL DIFFERENCE FROM MAP:
+            - mm[key] DOES NOT WORK! You CANNOT use [] because one key can match multiple values.
+            - Must use insert() or emplace().
+
+        - Time Complexity: O(log N)
+    */
+
+    multimap<int, string> mm;
+
+    // a. INSERTION (Must use insert or emplace)
+    mm.insert({1, "Apple"});
+    mm.insert({1, "Avocado"}); // Same key 1!
+    mm.insert({2, "Banana"});
+    mm.emplace(1, "Apricot");  // Same key 1!
+
+    cout << "Multimap elements (Sorted by Key, Duplicate Keys Allowed):\n";
+    for (auto p : mm) {
+        cout << "  Key: " << p.first << " -> Value: " << p.second << endl;
+    }
+    cout << "\n";
+
+    // b. COUNT & ERASE TRICK
+    cout << "Count of key 1: " << mm.count(1) << endl; // Output: 3
+
+    // mm.erase(1); // WARNING: Deletes ALL pairs with key = 1!
+
+    // To delete ONLY ONE pair with key = 1:
+    auto it = mm.find(1); // Finds the FIRST pair with key 1
+    if (it != mm.end()) {
+        mm.erase(it); // Erases ONLY that single pair
+    }
+
+    cout << "Count of key 1 after erasing ONE pair: " << mm.count(1) << "\n\n";
+}
+
+
+// ===================================================================
+// 12. UNORDERED MAP (NOT Sorted Keys, Unique Keys, Fast O(1))
+// ===================================================================
+void explainUnorderedMap() {
+    cout << "========== UNORDERED MAP ==========\n";
+    /*
+        - Stored in a HASH TABLE.
+        - RULES OF UNORDERED MAP:
+            1. UNIQUE KEYS : Every key must be unique.
+            2. NOT SORTED  : Order of keys is completely random/arbitrary!
+
+        - Time Complexity:
+            - Average / Best Case : O(1) [Constant time — FASTER than map!]
+            - Worst Case          : O(N) [Extremely rare, hash collisions]
+
+        - RESTRICTION: NO lower_bound() or upper_bound().
+        - Note: um[key] WORKS here just like regular map!
+    */
+
+    unordered_map<int, string> um;
+
+    um[10] = "Ten";
+    um[2]  = "Two";
+    um[5]  = "Five";
+
+    cout << "Unordered Map elements (Random Order, Unique Keys):\n";
+    for (auto p : um) {
+        cout << "  Key: " << p.first << " -> Value: " << p.second << endl;
+    }
+    cout << "\n";
+}
+
+
 
 int main() {
     explainVectors();
@@ -592,5 +860,10 @@ int main() {
     explainQueue();
     explainPriorityQueue();
     explainSet();
+    explainMultiSet();
+    explainUnorderedSet();
+    explainMap();
+    explainMultiMap();
+    explainUnorderedMap();
     return 0;
 }
