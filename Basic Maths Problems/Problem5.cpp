@@ -10,14 +10,17 @@ void divisor(int n){
     //     }
     // }
 
+    vector<int> list;
     for (int i = 1; i <= sqrt(n); i++) {
         if( n % i == 0) {
-            cout << i << ", ";
+            list.push_back(i);
             if ( (n / i) != i) {
-                cout << (n / i) << ", ";
+                list.push_back(n / i);
             }
         }
     }
+    sort(list.begin(), list.end());
+    for (auto j : list) cout << j << ", ";
 }
 
 int main(){
