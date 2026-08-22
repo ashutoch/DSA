@@ -1,4 +1,5 @@
 //! WAP for GCD of 2 numbers using euclidean algorithm
+//* Euclidean algorithm = (b, a % b)
 
 #include <bits/stdc++.h>
 using namespace std;
