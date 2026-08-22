@@ -4,16 +4,25 @@
 using namespace std;
 
 void gcd(int x, int y) {
-    // vector<int> a,b;
-    int gcd = 1;
+    // int gcd = 1;
 
-    for (int i = 1; i <= min(x, y); i++) {
-        if (x % i == 0 && y % i == 0) {
-            gcd = i;
+    // for (int i = 1; i <= min(x, y); i++) {
+    //     if (x % i == 0 && y % i == 0) {
+    //         gcd = i;
+    //     }
+    // }
+
+    int i;
+    for (i = min(x, y); i <= 1; i-- ) {
+        if(x % i == 0 && y % i == 0) {
+            // cout << i;
+            break;
         }
     }
 
-    cout << gcd;
+    cout << i;
+
+    // cout << gcd;
 }
 
 int main() {
