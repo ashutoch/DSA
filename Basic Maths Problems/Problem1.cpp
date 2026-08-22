@@ -4,13 +4,15 @@
 using namespace std;
 
 int count(int n){
-    int digit, num;
+    int c = 0;
+
     while (n > 0){
-        digit = n % 10;
-        num++;
+        // int digit = n % 10;
         n /= 10;
+        c += 1;
     }
-    cout << "The number of digits is: " << num;
+
+    cout << "The number of digits is: " << c;
     return 0;
 }
 
