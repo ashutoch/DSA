@@ -8,12 +8,17 @@ int rev(int n){
     cout << "Reverse Order: ";
     while(n != 0){
         num = n % 10;
+
+        // if (((rev < INT_MIN / 10 || (rev == INT_MIN / 10 && ld > 7))) || (rev < INT_MIN / 10 || (rev == INT_MIN / 10 && ld < -8)))
+
         n = n / 10;
         revNum = (revNum * 10) + num;
     }
     cout << revNum;
     return 0;
 }
+
+
 
 int main(){
     int n;
