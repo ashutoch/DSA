@@ -6,7 +6,7 @@ using namespace std;
 int rev(int n){
     int num, revNum = 0;
     cout << "Reverse Order: ";
-    while(n > 0){
+    while(n != 0){
         num = n % 10;
         n = n / 10;
         revNum = (revNum * 10) + num;
@@ -19,5 +19,5 @@ int main(){
     int n;
     cin >> n;
     rev(n);
-
+    return 0;
 }
