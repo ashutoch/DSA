@@ -95,7 +95,7 @@ void explainVectors() {
     cout << endl;
 
     // Method B: Standard Iterator Loop
-    // "auto" automatically figures out it is a vector<int>::iterator
+    //? "auto" automatically figures out it is a vector<int>::iterator
     cout << "   Standard Iterator loop: ";
     for (auto it = nums.begin(); it != nums.end(); it++) {
         cout << *(it) << " ";
