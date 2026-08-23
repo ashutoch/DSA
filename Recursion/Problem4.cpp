@@ -1,12 +1,13 @@
-//! Program to print sum of first n numbers
+//! Program to print number from 1 to n without using (i+1) / using only backtracking
 
-# include <bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
-int print(int n) {
-    if (n == 0) return 0;
+void print (int i) {
+    if (i < 1) return;
 
-    return n + print(n - 1);
+    print (i-1);
+    cout << i << endl;
 }
 
 int main() {
@@ -14,8 +15,6 @@ int main() {
     cout << "Enter a number: ";
     cin >> n;
     cout << endl;
-
-    cout << "sum is: " << print(n) << endl;
-
+    print(n);
     return 0;
 }
