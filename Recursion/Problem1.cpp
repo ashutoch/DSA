@@ -3,8 +3,13 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void print(string s) {
-    cout << s << endl;
+void print(int i, int n, string s) {
+    if (i > n){
+        return;
+    }
+
+    cout << i << ". " << s << endl;
+    print(i + 1, n, s);
 }
 
 int main() {
@@ -14,8 +19,6 @@ int main() {
     cin >> n;
     cout << "Enter the name: " << endl;
     cin >> s;
-    for (int i = 1; i <= n; i++) {
-        print(s);
-    }
+    print (1, n, s);
     return 0;
 }
