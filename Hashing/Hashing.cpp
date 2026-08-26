@@ -34,41 +34,23 @@
 // }
 
 
-
 #include <bits/stdc++.h>
 using namespace std;
 
 int main() {
     int n;
-    cout << "Enter number of elements in the array: ";
     cin >> n;
 
-    // Hash Map to store: Key (Element) -> Value (Frequency)
-    unordered_map<int, int> mp;
-
-    cout << "Enter " << n << " elements: ";
+    int arr[100], hash[100] = {0};
     for (int i = 0; i < n; i++) {
-        int element;
-        cin >> element;
-        
-        // PRE-COMPUTATION PHASE:
-        // Increment frequency of 'element' in O(1) average time
-        mp[element]++; 
+        cin >> arr[i];
+        hash[arr[i]]++;
     }
 
-    int q;
-    cout << "\nEnter number of queries to search: ";
-    cin >> q;
-
-    cout << "Enter the " << q << " query numbers:\n";
-    while (q--) {
-        int number;
-        cin >> number;
-
-        // FETCHING PHASE:
-        // Look up pre-calculated frequency in O(1) average time
-        cout << "Frequency of " << number << " = " << mp[number] << endl;
-    }
+    // searching for single element
+    int num;
+    cin >> num;
+    cout << hash[num];
 
     return 0;
 }
