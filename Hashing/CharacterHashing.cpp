@@ -5,7 +5,7 @@ using namespace std;
 
 int hashing(char c, string s) {
     int count = 0;
-    for (int i = 0; i < s.length(); i++) {
+    for (int i = 0; i < s.size(); i++) {
         if (s[i] == c) count++;
     }
     cout << "The number of times \"" << c << "\" occurs is: " << count;
