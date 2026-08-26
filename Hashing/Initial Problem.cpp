@@ -29,6 +29,7 @@ int main() {
     cout << endl << "The number " << num << " occurs " << ans << " times." << endl;
 
     //* STL shortcut
+    cout << "\n\nUsing STL";
     int ansSTL = count(arr.begin(), arr.end(), num);
     cout << "The number " << num << " occurs " << ansSTL << " times." << endl;
 
