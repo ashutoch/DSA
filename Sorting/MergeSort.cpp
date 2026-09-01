@@ -42,6 +42,7 @@ void merge(vector<int>& arr, int low, int mid, int high) {
 void mergeSort(vector<int>& arr, int low, int high){
     if ( low >= high ) return; //* for when the array is already sorted
 
+    // int mid = (low + high) / 2;
     int mid = low + (high - low) / 2; //* to avoid overflow
 
     mergeSort(arr, low, mid);
