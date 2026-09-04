@@ -4,7 +4,7 @@
 using namespace std;
 
 int secondLargest(vector<int>& arr, int n) {
-    int largest = arr[0], secondlarge = -1;
+    int largest = INT_MIN, secondlarge = INT_MIN;
 
     for (int i = 0; i < n; i++) {
         if (arr[i] > largest) {
@@ -18,7 +18,7 @@ int secondLargest(vector<int>& arr, int n) {
         }
     }
 
-    return secondlarge;
+    return (secondlarge == INT_MIN) ? -1 : secondlarge;
 }
 
 int main() {
